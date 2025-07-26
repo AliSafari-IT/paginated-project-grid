@@ -25,7 +25,7 @@
     "react-dom": "^17.0.0 || ^18.0.0"
   },
   "dependencies": {
-    "@asafarim/project-card": "^1.0.3"
+    "@asafarim/project-card": "^1.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
