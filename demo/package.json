@@ -1,6 +1,6 @@
 {
   "name": "paginated-project-grid-demo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,10 +13,10 @@
     "pregp": "pnpm run buildClean"
   },
   "dependencies": {
-    "@asafarim/paginated-project-grid": "workspace:*",
+    "@asafarim/paginated-project-grid": "file:../",
     "@asafarim/display-code": "^1.0.1",
-    "@asafarim/project-card": "workspace:*",
-    "@asafarim/shared": "workspace:*",
+    "@asafarim/project-card": "^1.0.3",
+    "@asafarim/shared": "^1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

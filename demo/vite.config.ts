@@ -19,8 +19,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src'),
-        '@asafarim/shared': path.resolve(__dirname, '../../../libs/shared/src')
+        '@': resolve(__dirname, './src')
       }
     },
   };
