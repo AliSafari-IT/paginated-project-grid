@@ -1,16 +1,24 @@
-import { ProjectCardProps } from '@asafarim/project-card';
+import { TechStackItem, ProjectLink, Theme } from '@asafarim/project-card';
 
-export interface Project extends Omit<ProjectCardProps, 'currentTheme' | 'className' | 'onCardClick' | 'showTechStackIcons' | 'maxDescriptionLength' | 'imageAlt' | 'isLoading'> {
+export interface Project {
   id: string;
-  category?: string;
+  title: string;
+  description: string;
+  image?: string;
+  techStacks: TechStackItem[];
+  links: ProjectLink[];
   tags?: string[];
+  category?: string;
+  status?: 'active' | 'archived' | 'in-progress';
+  featured?: boolean;
+  lastUpdated?: string;
   dateCreated?: string;
 }
 
 export interface PaginatedProjectGridProps {
   projects: Project[];
   cardsPerPage?: number;
-  currentTheme?: 'light' | 'dark' | 'auto';
+  currentTheme?: Theme;
   className?: string;
   onProjectClick?: (project: Project) => void;
   showTechStackIcons?: boolean;
@@ -20,13 +28,15 @@ export interface PaginatedProjectGridProps {
   noResultsMessage?: string;
   loadingMessage?: string;
   isLoading?: boolean;
-  searchFields?: ('title' | 'description' | 'techStack' | 'tags' | 'category')[];
+  searchFields?: ('title' | 'description' | 'techStacks' | 'tags' | 'category')[];
   responsive?: {
-    mobile?: number;
-    tablet?: number;
-    desktop?: number;
+    mobile: number;
+    tablet: number;
+    desktop: number;
   };
   showLoadMore?: boolean;
   loadMoreText?: string;
   animationDuration?: number;
 }
+
+export type { TechStackItem, ProjectLink, Theme };

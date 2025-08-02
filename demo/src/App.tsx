@@ -32,7 +32,7 @@ const projects = [
     title: 'Project Title',
     description: 'Project description goes here...',
     image: 'https://example.com/image.jpg',
-    techStack: [
+    techStacks: [
       { name: 'React', icon: 'react-icon', color: '#61DAFB' },
       { name: 'TypeScript', icon: 'ts-icon', color: '#3178C6' }
     ],

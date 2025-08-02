@@ -18,6 +18,10 @@ A responsive React component for displaying paginated project cards with built-i
 npm install @asafarim/paginated-project-grid @asafarim/project-card
 ```
 
+**Note**: This package requires `@asafarim/project-card` as a peer dependency.
+
+**Important**: There is a known issue with the `@asafarim/project-card` package where the TypeScript definitions use `techStacks` (plural) but the compiled code expects `techStack` (singular). This package includes a workaround for this issue.
+
 ## Usage
 
 ```tsx
@@ -29,11 +33,11 @@ const projects = [
     title: 'E-commerce Platform',
     description: 'A full-stack e-commerce solution with React and Node.js',
     image: '/images/ecommerce.jpg',
-    techStack: [
-      { name: 'React', color: '#61dafb', icon: '⚛️' },
-      { name: 'Node.js', color: '#339933', icon: '🟢' },
-      { name: 'MongoDB', color: '#47A248', icon: '🍃' }
-    ],
+         techStacks: [
+       { name: 'React', color: '#61dafb', icon: '⚛️' },
+       { name: 'Node.js', color: '#339933', icon: '🟢' },
+       { name: 'MongoDB', color: '#47A248', icon: '🍃' }
+     ],
     links: [
       { type: 'demo', url: 'https://demo.example.com' },
       { type: 'repo', url: 'https://github.com/user/repo' }
@@ -81,7 +85,7 @@ function ProjectShowcase() {
 | `noResultsMessage` | `string` | `"No projects found..."` | Message when no results |
 | `loadingMessage` | `string` | `"Loading projects..."` | Loading state message |
 | `isLoading` | `boolean` | `false` | Show loading state |
-| `searchFields` | `Array` | `['title', 'description', 'techStack', 'tags']` | Fields to search in |
+| `searchFields` | `Array` | `['title', 'description', 'techStacks', 'tags']` | Fields to search in |
 | `responsive` | `object` | `{mobile: 1, tablet: 2, desktop: 3}` | Responsive breakpoints |
 | `showLoadMore` | `boolean` | `false` | Use load more instead of pagination |
 | `loadMoreText` | `string` | `"Load More"` | Load more button text |
@@ -95,8 +99,8 @@ interface Project {
   title: string;
   description: string;
   image?: string;
-  techStack: TechStackItem[];
-  links: ProjectLink[];
+  techStacks: TechStackItem[];  // Required - from @asafarim/project-card
+  links: ProjectLink[];          // Required - from @asafarim/project-card
   tags?: string[];
   category?: string;
   status?: 'active' | 'archived' | 'in-progress';
@@ -104,6 +108,9 @@ interface Project {
   lastUpdated?: string;
   dateCreated?: string;
 }
+
+// Import types from @asafarim/project-card
+import type { TechStackItem, ProjectLink, Theme } from '@asafarim/project-card';
 ```
 
 ## Search Functionality
@@ -112,7 +119,7 @@ The component includes a collapsible search feature that can search across multi
 
 - **title**: Project title
 - **description**: Project description
-- **techStack**: Technology names
+- **techStacks**: Technology names
 - **tags**: Project tags
 - **category**: Project category
 
@@ -122,7 +129,7 @@ The component includes a collapsible search feature that can search across multi
 <PaginatedProjectGrid
   projects={projects}
   enableSearch={true}
-  searchFields={['title', 'techStack', 'tags']}
+  searchFields={['title', 'techStacks', 'tags']}
   searchPlaceholder="Search by title, tech, or tags..."
 />
 ```

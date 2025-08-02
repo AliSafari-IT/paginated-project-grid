@@ -53,10 +53,7 @@ importers:
         version: 1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@asafarim/paginated-project-grid':
         specifier: file:../
-        version: file:(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@asafarim/project-card':
-        specifier: ^1.0.3
-        version: 1.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: file:(@asafarim/project-card@1.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@asafarim/shared':
         specifier: 1.0.3
         version: 1.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -104,12 +101,7 @@ packages:
   '@asafarim/paginated-project-grid@file:':
     resolution: {directory: '', type: directory}
     peerDependencies:
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-
-  '@asafarim/project-card@1.0.3':
-    resolution: {integrity: sha512-CCB7+/zzny0og8LtMubykS0F8z5r6QdQDAcdxf6TmiLAIwAPNoe7iG94V5ia31ZST2bYVgZDQ5wKTvrSKpH6Gw==}
-    peerDependencies:
+      '@asafarim/project-card': ^1.0.4
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
@@ -1672,15 +1664,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@asafarim/paginated-project-grid@file:(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@asafarim/paginated-project-grid@file:(@asafarim/project-card@1.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@asafarim/project-card': 1.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  '@asafarim/project-card@1.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@asafarim/shared': 1.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 

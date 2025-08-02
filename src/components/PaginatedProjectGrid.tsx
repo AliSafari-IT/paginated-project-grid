@@ -16,7 +16,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   noResultsMessage = "No projects found matching your search.",
   loadingMessage = "Loading projects...",
   isLoading = false,
-  searchFields = ['title', 'description', 'techStack', 'tags'],
+  searchFields = ['title', 'description', 'techStacks', 'tags'],
   responsive = {
     mobile: 1,
     tablet: 2,
@@ -35,23 +35,23 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
 
   // Filter projects based on search term
   const filteredProjects = useMemo(() => {
-    if (!searchTerm.trim()) return projects;
+    if (!searchTerm.trim()) return projects || [];
 
     const searchLower = searchTerm.toLowerCase().trim();
     
-    return projects.filter(project => {
+    return (projects || []).filter(project => {
       const searchableFields = [];
       
-      if (searchFields.includes('title')) {
+      if (searchFields.includes('title') && project.title) {
         searchableFields.push(project.title);
       }
       
-      if (searchFields.includes('description')) {
+      if (searchFields.includes('description') && project.description) {
         searchableFields.push(project.description);
       }
       
-      if (searchFields.includes('techStack')) {
-        searchableFields.push(...project.techStack.map(tech => tech.name));
+      if (searchFields.includes('techStacks') && project.techStacks && Array.isArray(project.techStacks)) {
+        searchableFields.push(...project.techStacks.map(tech => tech.name));
       }
       
       if (searchFields.includes('tags') && project.tags) {
@@ -167,7 +167,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   }
 
   // Empty state
-  if (projects.length === 0) {
+  if (!projects || projects.length === 0) {
     return (
       <div className={containerClasses}>
         <div className={`${styles.emptyState} ${isDark ? styles.emptyStateDark : ''}`}>
@@ -226,18 +226,27 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
       {filteredProjects.length > 0 && (
         <>
           <div className={getGridClass()}>
-            {paginatedProjects.map((project, index) => (
+            {paginatedProjects && paginatedProjects.map((project: Project, index: number) => (
               <div 
                 key={project.id} 
                 className={styles.projectCard}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <ProjectCard
-                  {...project}
-                  currentTheme={currentTheme}
-                  showTechStackIcons={showTechStackIcons}
-                  maxDescriptionLength={maxDescriptionLength}
-                  onCardClick={() => onProjectClick?.(project)}
+                  {...{
+                    title: project.title,
+                    description: project.description,
+                    image: project.image,
+                    techStack: project.techStacks, // Workaround for package bug
+                    links: project.links,
+                    currentTheme,
+                    showTechStackIcons,
+                    maxDescriptionLength,
+                    onCardClick: () => onProjectClick?.(project),
+                    featured: project.featured,
+                    lastUpdated: project.lastUpdated,
+                    status: project.status
+                  } as any}
                 />
               </div>
             ))}
@@ -268,30 +277,33 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                 </button>
 
                 {/* Page Numbers */}
-                {getPageNumbers().map((page, index) => (
-                  <React.Fragment key={index}>
-                    {page === '...' ? (
-                      <span className={`${styles.paginationInfo} ${isDark ? styles.paginationInfoDark : ''}`}>
-                        {page}
-                      </span>
-                    ) : (
-                      <button
-                        onClick={() => handlePageChange(page as number)}
-                        className={`${styles.paginationButton} ${
-                          currentPage === page 
-                            ? isDark 
-                              ? styles.paginationButtonActiveDark 
-                              : styles.paginationButtonActive
-                            : isDark 
-                              ? styles.paginationButtonDark 
-                              : ''
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    )}
-                  </React.Fragment>
-                ))}
+                {(() => {
+                  const pageNumbers = getPageNumbers();
+                  return pageNumbers && pageNumbers.map((page, index) => (
+                    <React.Fragment key={index}>
+                      {page === '...' ? (
+                        <span className={`${styles.paginationInfo} ${isDark ? styles.paginationInfoDark : ''}`}>
+                          {page}
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => handlePageChange(page as number)}
+                          className={`${styles.paginationButton} ${
+                            currentPage === page 
+                              ? isDark 
+                                ? styles.paginationButtonActiveDark 
+                                : styles.paginationButtonActive
+                              : isDark 
+                                ? styles.paginationButtonDark 
+                                : ''
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )}
+                    </React.Fragment>
+                  ));
+                })()}
 
                 {/* Next Button */}
                 <button
