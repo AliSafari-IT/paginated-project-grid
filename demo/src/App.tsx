@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PaginatedProjectGrid } from "@asafarim/paginated-project-grid";
 import { mockProjects } from "./mockData";
 import "./App.css";
@@ -22,6 +22,14 @@ const App: React.FC = () => {
     console.log("Project clicked:", project.title);
     alert(`You clicked on: ${project.title}`);
   };
+
+  useEffect(() => {
+    if (showTechStackIcons) {
+      document.body.className = "techStackIcons";
+    } else {
+      document.body.className = "";
+    }
+  }, [showTechStackIcons]);
 
   const codeExample = `import React from 'react'
 import { PaginatedProjectGrid } from '@asafarim/paginated-project-grid'

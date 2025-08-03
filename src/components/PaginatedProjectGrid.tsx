@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ProjectCard, ProjectCardProps } from '@asafarim/project-card';
+import { ProjectCard } from '@asafarim/project-card';
 import { PaginatedProjectGridProps, Project } from '../types';
 import styles from './PaginatedProjectGrid.module.css';
 
@@ -51,7 +51,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
       }
       
       if (searchFields.includes('techStacks') && project.techStacks && Array.isArray(project.techStacks)) {
-        searchableFields.push(...project.techStacks.map(tech => tech.name));
+        searchableFields.push(...project.techStacks.map((tech: any) => tech.name));
       }
       
       if (searchFields.includes('tags') && project.tags) {
@@ -237,7 +237,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                     title: project.title,
                     description: project.description,
                     image: project?.image,
-                    techStack: project?.techStacks, // Workaround for package bug
+                    techStacks: project?.techStacks,
                     links: project?.links,
                     currentTheme,
                     showTechStackIcons,
@@ -248,7 +248,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                     tags: project.tags,
                     category: project.category,
                     status: project.status
-                  } as ProjectCardProps}
+                  }}
                 />
               </div>
             ))}

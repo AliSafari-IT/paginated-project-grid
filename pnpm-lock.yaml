@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@asafarim/project-card':
-        specifier: ^1.1.1
-        version: 1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.1.2
+        version: 1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^17.0.0 || ^18.0.0
         version: 18.3.1
@@ -95,8 +95,8 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
-  '@asafarim/project-card@1.1.1':
-    resolution: {integrity: sha512-XpHLxbFWtGdYYAw5pJ90Qc3jtxxvBJzwuYuQZ6jTGVjmh2j4b0QP9SSKvXI7zSuqOUb1XO+gkZbTuIu3n4FmlQ==}
+  '@asafarim/project-card@1.1.2':
+    resolution: {integrity: sha512-VjBj6dVS8+1CEPeVWNAS3b9Hj7413/nf5d65FL8g/eobVKy/Y2q7Km849OdOmwptkycwlnVWXAF1DF+t23Wv9Q==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -1654,7 +1654,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@asafarim/project-card@1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@asafarim/project-card@1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
