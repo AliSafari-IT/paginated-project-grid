@@ -246,7 +246,7 @@ export const mockProjects: Project[] = [
     title: 'Mobile App',
     description: 'A cross-platform mobile application built with React Native. Provides mobile access to the ASafariM ecosystem with offline capabilities.',
     image: {
-      src: 'https://avatars.githubusercontent.com/u/58768873?v=4',
+      src: 'https://picsum.photos/600/400?random=12',
       alt: 'Mobile App',
     },
     techStacks: [
