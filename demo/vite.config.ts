@@ -1,14 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path, { resolve } from 'path'
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  const isProd = mode === 'production';
-  
+export default defineConfig(() => {
   return {
     plugins: [react()],
-    base: isProd ? '/paginated-project-grid/' : '/',  // Match the repository name for GitHub Pages
+    base: '/paginated-project-grid/',  // Match the repository name for GitHub Pages
     server: {
       port: 3007,
       open: true
@@ -19,7 +17,8 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src')
+        '@': resolve(__dirname, './src'),
+        '@asafarim/paginated-project-grid': resolve(__dirname, '..')
       }
     },
   };

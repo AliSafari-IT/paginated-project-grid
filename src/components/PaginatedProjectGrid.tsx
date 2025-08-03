@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ProjectCard } from '@asafarim/project-card';
+import { ProjectCard, ProjectCardProps } from '@asafarim/project-card';
 import { PaginatedProjectGridProps, Project } from '../types';
 import styles from './PaginatedProjectGrid.module.css';
 
@@ -236,17 +236,19 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                   {...{
                     title: project.title,
                     description: project.description,
-                    image: project.image,
-                    techStack: project.techStacks, // Workaround for package bug
-                    links: project.links,
+                    image: project?.image,
+                    techStack: project?.techStacks, // Workaround for package bug
+                    links: project?.links,
                     currentTheme,
                     showTechStackIcons,
                     maxDescriptionLength,
                     onCardClick: () => onProjectClick?.(project),
                     featured: project.featured,
                     lastUpdated: project.lastUpdated,
+                    tags: project.tags,
+                    category: project.category,
                     status: project.status
-                  } as any}
+                  } as ProjectCardProps}
                 />
               </div>
             ))}

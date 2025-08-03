@@ -1,21 +1,13 @@
-import { TechStackItem, ProjectLink, Theme } from '@asafarim/project-card';
+import { Theme, ProjectCardProps } from '@asafarim/project-card';
 
-export interface Project {
+export type Project = ProjectCardProps & {
   id: string;
-  title: string;
-  description: string;
-  image?: string;
-  techStacks: TechStackItem[];
-  links: ProjectLink[];
   tags?: string[];
   category?: string;
-  status?: 'active' | 'archived' | 'in-progress';
-  featured?: boolean;
-  lastUpdated?: string;
   dateCreated?: string;
 }
 
-export interface PaginatedProjectGridProps {
+export type PaginatedProjectGridProps = {
   projects: Project[];
   cardsPerPage?: number;
   currentTheme?: Theme;
@@ -38,5 +30,3 @@ export interface PaginatedProjectGridProps {
   loadMoreText?: string;
   animationDuration?: number;
 }
-
-export type { TechStackItem, ProjectLink, Theme };
