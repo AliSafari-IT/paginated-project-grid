@@ -3,26 +3,42 @@ import { Project } from '@asafarim/paginated-project-grid'
 export const mockProjects: Project[] = [
   {
     id: '1',
-    title: 'ASafariM Web Application',
-    description: 'A microservices architecture web application with ASP.NET Core backend, React frontend, and MySQL database. Features containerized development environment with Docker Compose.',
+    title: 'E-commerce Platform',
+    description: 'A full-stack e-commerce platform with user authentication, shopping cart, and payment integration using React and Node.js. Features include product catalog, user reviews, order management, and real-time inventory tracking.',
     image: {
-      src: 'https://picsum.photos/600/400?random=1',
-      alt: 'ASafariM Web Application',
+      src: 'https://picsum.photos/400/200?random=1',
+      alt: 'E-commerce Platform'
     },
     techStacks: [
-      { name: 'ASP.NET Core', color: '#512BD4', icon: '🔷' },
-      { name: 'React', color: '#61DAFB', icon: '⚛️' },
-      { name: 'MySQL', color: '#4479A1', icon: '🐬' },
-      { name: 'Docker', color: '#2496ED', icon: '🐳' }
+      { name: 'React', color: 'var(--pc-tag-bg,rgb(234, 174, 236))', icon: '⚛️' },
+      { name: 'Node.js', color: 'var(--pc-tag-bg,rgb(168, 195, 211))', icon: '🟢' },
+      { name: 'MongoDB', color: 'var(--pc-tag-bg,rgb(212, 209, 155))', icon: '🍃' },
+      { name: 'Express', color: 'var(--pc-tag-bg,rgb(233, 179, 179))', icon: '🚀' }
     ],
     links: [
-      { type: 'demo', url: 'https://asafarim.com' },
-      { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp' },
-      { type: 'documentation', url: 'https://docs.asafarim.com' }
+      { type: 'demo', url: 'https://ecommerce-demo.com', label: 'Live Demo' },
+      { type: 'repo', url: 'https://github.com/user/ecommerce' }
     ],
-    tags: ['web', 'microservices', 'docker', 'fullstack'],
-    category: 'Web Application',
-    dateCreated: '2023-01-15'
+    currentTheme: 'dark',
+    status: 'active',
+    featured: true,
+    priority: 'High',
+    progress: 85,
+    tags: [
+      { name: 'E-commerce', onClick: () => {
+        alert('E-commerce');
+      } },
+      { name: 'Full-stack', navigateTo: 'https://ecommerce-demo2.com' },
+      { name: 'React', navigateTo: 'https://ecommerce-demo3.com' },
+      { name: 'Node.js', navigateTo: 'https://ecommerce-demo4.com' },
+      { name: 'MongoDB', navigateTo: 'https://ecommerce-demo5.com' }
+    ],
+    startDate: new Date().toISOString(),
+    dueDate: new Date(new Date().setDate(new Date().getDate() + 100)).toISOString(),
+    budget: 15000,
+    budgetCurrencySymbol: '$',
+    isPublic: true,
+    lastUpdated: new Date().toISOString()
   },
   {
     id: '2',
@@ -41,9 +57,14 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://asafarim.com/demos/project-grid' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/packages/paginated-project-grid' }
     ],
-    tags: ['component', 'react', 'typescript', 'ui'],
+    tags: [
+      { name: 'React', navigateTo: 'https://reactjs.org' },
+      { name: 'TypeScript', navigateTo: 'https://typescriptlang.org' },
+      { name: 'CSS Modules', onClick: () => alert('CSS Modules') }
+    ],
     category: 'UI Component',
-    dateCreated: '2023-03-22'
+    status: 'coming-soon',
+    dateCreated: '2023-02-05'
   },
   {
     id: '3',
@@ -56,15 +77,21 @@ export const mockProjects: Project[] = [
     techStacks: [
       { name: 'TypeScript', color: '#3178C6', icon: '📘' },
       { name: 'Node.js', color: '#339933', icon: '🟢' },
-      { name: 'Markdown', color: '#000000', icon: '📝' }
+      { name: 'Markdown', color: 'var(--color-text-primary,rgb(207, 24, 24))', icon: '📝' }
     ],
     links: [
       { type: 'demo', url: 'https://asafarim.com/demos/md-explorer' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/packages/md-file-explorer' },
       { type: 'documentation', url: 'https://docs.asafarim.com/md-explorer' }
     ],
-    tags: ['library', 'markdown', 'filesystem', 'typescript'],
+    tags: [
+      { name: 'TypeScript', navigateTo: 'https://typescriptlang.org' },
+      { name: 'Node.js', navigateTo: 'https://nodejs.org' },
+      { name: 'Markdown', navigateTo: 'https://daringfireball.net/projects/markdown' }
+    ],
     category: 'Library',
+    status: 'in-progress',
+    budget: 10000,
     dateCreated: '2023-05-10'
   },
   {
@@ -84,8 +111,14 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://asafarim.com/demos/project-card' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/packages/project-card' }
     ],
-    tags: ['component', 'react', 'ui', 'card'],
+    tags: [
+      { name: 'Component', onClick: () => alert('Component') },
+      { name: 'React', navigateTo: 'https://reactjs.org' },
+      { name: 'UI', onClick: () => alert('UI') },
+      { name: 'Card', onClick: () => alert('Card') }
+    ],
     category: 'UI Component',
+    status: 'archived',
     dateCreated: '2023-02-05'
   },
   {
@@ -106,8 +139,14 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://blog.asafarim.com' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-blog' }
     ],
-    tags: ['blog', 'docusaurus', 'typescript', 'mdx'],
+    tags: [
+      { name: 'Blog', onClick: () => alert('Blog') },
+      { name: 'Docusaurus', navigateTo: 'https://docusaurus.io' },
+      { name: 'TypeScript', navigateTo: 'https://typescriptlang.org' },
+      { name: 'MDX', navigateTo: 'https://mdxjs.com' }
+    ],
     category: 'Blog',
+    status: 'completed',
     dateCreated: '2023-06-18'
   },
   {
@@ -127,8 +166,14 @@ export const mockProjects: Project[] = [
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/services/gateway' },
       { type: 'documentation', url: 'https://docs.asafarim.com/api/gateway' }
     ],
-    tags: ['api', 'gateway', 'microservices', 'dotnet'],
+    tags: [
+      { name: 'API', onClick: () => alert('API') },
+      { name: 'Gateway', onClick: () => alert('Gateway') },
+      { name: 'Microservices', onClick: () => alert('Microservices') },
+      { name: 'DotNet', navigateTo: 'https://dotnet.microsoft.com' }
+    ],
     category: 'Backend Service',
+    status: 'planning',
     dateCreated: '2023-04-02'
   },
   {
@@ -149,7 +194,12 @@ export const mockProjects: Project[] = [
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/services/projects' },
       { type: 'documentation', url: 'https://docs.asafarim.com/api/projects' }
     ],
-    tags: ['api', 'rest', 'database', 'dotnet'],
+    tags: [
+      { name: 'API', onClick: () => alert('API') },
+      { name: 'REST', onClick: () => alert('REST') },
+      { name: 'Database', onClick: () => alert('Database') },
+      { name: 'DotNet', navigateTo: 'https://dotnet.microsoft.com' }
+    ],
     category: 'Backend Service',
     dateCreated: '2023-04-15'
   },
@@ -171,7 +221,12 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://docs.asafarim.com' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/docs' }
     ],
-    tags: ['documentation', 'mkdocs', 'markdown', 'technical-writing'],
+    tags: [
+      { name: 'Documentation', onClick: () => alert('Documentation') },
+      { name: 'MkDocs', navigateTo: 'https://www.mkdocs.org' },
+      { name: 'Markdown', navigateTo: 'https://daringfireball.net/projects/markdown' },
+      { name: 'Technical Writing', onClick: () => alert('Technical Writing') }
+    ],
     category: 'Documentation',
     dateCreated: '2023-03-10'
   },
@@ -193,7 +248,12 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://ui.asafarim.com' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/packages/ui' }
     ],
-    tags: ['ui', 'components', 'react', 'design-system'],
+    tags: [
+      { name: 'UI', onClick: () => alert('UI') },
+      { name: 'Components', onClick: () => alert('Components') },
+      { name: 'React', navigateTo: 'https://reactjs.org' },
+      { name: 'Design System', onClick: () => alert('Design System') }
+    ],
     category: 'UI Library',
     dateCreated: '2023-01-30'
   },
@@ -215,7 +275,12 @@ export const mockProjects: Project[] = [
       { type: 'demo', url: 'https://alisafari.dev' },
       { type: 'repo', url: 'https://github.com/AliSafari-IT/portfolio' }
     ],
-    tags: ['portfolio', 'personal', 'frontend', 'react'],
+    tags: [
+      { name: 'Portfolio', onClick: () => alert('Portfolio') },
+      { name: 'Personal', onClick: () => alert('Personal') },
+      { name: 'Frontend', onClick: () => alert('Frontend') },
+      { name: 'React', navigateTo: 'https://reactjs.org' }
+    ],
     category: 'Personal Website',
     dateCreated: '2023-02-20'
   },
@@ -237,8 +302,14 @@ export const mockProjects: Project[] = [
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-webapp/tree/main/services/auth' },
       { type: 'documentation', url: 'https://docs.asafarim.com/api/auth' }
     ],
-    tags: ['authentication', 'security', 'jwt', 'oauth'],
+    tags: [
+      { name: 'Authentication', onClick: () => alert('Authentication') },
+      { name: 'Security', onClick: () => alert('Security') },
+      { name: 'JWT', navigateTo: 'https://jwt.io' },
+      { name: 'OAuth', navigateTo: 'https://oauth.net' }
+    ],
     category: 'Backend Service',
+    status: 'completed',
     dateCreated: '2023-05-25'
   },
   {
@@ -253,14 +324,21 @@ export const mockProjects: Project[] = [
       { name: 'React Native', color: '#61DAFB', icon: '📱' },
       { name: 'TypeScript', color: '#3178C6', icon: '📘' },
       { name: 'Redux', color: '#764ABC', icon: '🔄' },
-      { name: 'Expo', color: '#000020', icon: '⚙️' }
+      { name: 'Expo', color: '#1B1F24', icon: '⚙️' }
     ],
     links: [
       { type: 'repo', url: 'https://github.com/AliSafari-IT/asafarim-mobile' },
       { type: 'documentation', url: 'https://docs.asafarim.com/mobile' }
     ],
-    tags: ['mobile', 'react-native', 'cross-platform', 'app'],
+    tags: [
+      { name: 'Mobile', onClick: () => alert('Mobile') },
+      { name: 'React Native', navigateTo: 'https://reactnative.dev' },
+      { name: 'Cross Platform', onClick: () => alert('Cross Platform') },
+      { name: 'App', onClick: () => alert('App') }
+    ],
     category: 'Mobile Application',
+    status: 'draft',
+    currentTheme: 'light',
     dateCreated: '2023-07-12'
   }
 ]

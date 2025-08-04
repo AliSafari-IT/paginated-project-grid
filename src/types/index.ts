@@ -1,8 +1,13 @@
 import { Theme, ProjectCardProps } from '@asafarim/project-card';
 
+export type ProjectTag = {
+  name: string;
+  navigateTo?: string;
+  onClick?: () => void;
+}
+
 export type Project = ProjectCardProps & {
   id: string;
-  tags?: string[];
   category?: string;
   dateCreated?: string;
 }
@@ -25,6 +30,8 @@ export type PaginatedProjectGridProps = {
     mobile: number;
     tablet: number;
     desktop: number;
+    largeDesktop: number;
+    extraLargeDesktop: number;
   };
   showLoadMore?: boolean;
   loadMoreText?: string;

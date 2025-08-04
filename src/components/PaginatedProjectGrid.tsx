@@ -6,7 +6,7 @@ import styles from './PaginatedProjectGrid.module.css';
 export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   projects,
   cardsPerPage = 6,
-  currentTheme = 'light',
+  currentTheme = 'dark',
   className = '',
   onProjectClick,
   showTechStackIcons = false,
@@ -20,11 +20,13 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   responsive = {
     mobile: 1,
     tablet: 2,
-    desktop: 3
-  },
+    desktop: 3,
+    largeDesktop: 4,
+    extraLargeDesktop: 5
+  },  
   showLoadMore = false,
   loadMoreText = "Load More",
-  animationDuration = 300
+  animationDuration = 300,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -55,7 +57,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
       }
       
       if (searchFields.includes('tags') && project.tags) {
-        searchableFields.push(...project.tags);
+        searchableFields.push(...project.tags.map((tag: any) => typeof tag === 'string' ? tag : tag.name));
       }
       
       if (searchFields.includes('category') && project.category) {
@@ -244,10 +246,22 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                     maxDescriptionLength,
                     onCardClick: () => onProjectClick?.(project),
                     featured: project.featured,
+                    isLoading: isLoading,
+                    isPublic: project.isPublic,
                     lastUpdated: project.lastUpdated,
-                    tags: project.tags,
                     category: project.category,
-                    status: project.status
+                    status: project.status,
+                    tags: project.tags,
+                    priority: project.priority,
+                    budget: project.budget,
+                    budgetCurrency: project.budgetCurrency,
+                    budgetCurrencySymbol: project.budgetCurrencySymbol,
+                    dateCreated: project.dateCreated,
+                    dateUpdated: project.lastUpdated,
+                    progress: project.progress,
+                    startDate: project.startDate,
+                    endDate: project.endDate,
+                    dueDate: project.dueDate,
                   }}
                 />
               </div>

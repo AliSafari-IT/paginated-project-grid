@@ -1,23 +1,50 @@
+/* Theme Variables */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #e74c3c;
-  --text-color: #333;
-  --text-light: #666;
-  --background-color: #f9f9f9;
-  --card-background: #fff;
-  --border-color: #eaeaea;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  
-  --dark-primary-color: #2980b9;
-  --dark-secondary-color: #27ae60;
-  --dark-accent-color: #c0392b;
-  --dark-text-color: #f5f5f5;
+  /* Light Theme Variables */
+  --light-primary: #3498db;
+  --light-secondary: #2ecc71;
+  --light-accent: #e74c3c;
+  --light-text: #333;
+  --light-text-light: #666;
+  --light-background: #f9f9f9;
+  --light-card: #fff;
+  --light-border: #eaeaea;
+  --light-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Dark Theme Variables */
+  --dark-primary: #2980b9;
+  --dark-secondary: #27ae60;
+  --dark-accent: #c0392b;
+  --dark-text: #f5f5f5;
   --dark-text-light: #bbb;
-  --dark-background-color: #222;
-  --dark-card-background: #333;
-  --dark-border-color: #444;
-  --dark-shadow-color: rgba(0, 0, 0, 0.3);
+  --dark-background: #222;
+  --dark-card: #333;
+  --dark-border: #444;
+  --dark-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Default to light theme */
+  --primary-color: var(--light-primary);
+  --secondary-color: var(--light-secondary);
+  --accent-color: var(--light-accent);
+  --text-color: var(--light-text);
+  --text-light: var(--light-text-light);
+  --background-color: var(--light-background);
+  --card-background: var(--light-card);
+  --border-color: var(--light-border);
+  --shadow-color: var(--light-shadow);
+}
+
+/* Dark theme class */
+body.dark {
+  --primary-color: var(--dark-primary);
+  --secondary-color: var(--dark-secondary);
+  --accent-color: var(--dark-accent);
+  --text-color: var(--dark-text);
+  --text-light: var(--dark-text-light);
+  --background-color: var(--dark-background);
+  --card-background: var(--dark-card);
+  --border-color: var(--dark-border);
+  --shadow-color: var(--dark-shadow);
 }
 
 * {
@@ -32,11 +59,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
-}
-
-body.dark {
-  color: var(--dark-text-color);
-  background-color: var(--dark-background-color);
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .container {
@@ -56,19 +79,11 @@ body.dark {
   color: var(--primary-color);
 }
 
-body.dark .header h1 {
-  color: var(--dark-primary-color);
-}
-
 .header p {
   font-size: 1.2rem;
   color: var(--text-light);
   max-width: 800px;
   margin: 0 auto;
-}
-
-body.dark .header p {
-  color: var(--dark-text-light);
 }
 
 .demo-section {
@@ -83,11 +98,6 @@ body.dark .header p {
   color: var(--primary-color);
 }
 
-body.dark .demo-section h2 {
-  border-bottom-color: var(--dark-border-color);
-  color: var(--dark-primary-color);
-}
-
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -97,11 +107,7 @@ body.dark .demo-section h2 {
   background-color: var(--card-background);
   border-radius: 8px;
   box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-body.dark .controls {
-  background-color: var(--dark-card-background);
-  box-shadow: 0 2px 8px var(--dark-shadow-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .control-group {
@@ -114,10 +120,7 @@ body.dark .controls {
 .control-group label {
   font-weight: 500;
   margin-bottom: 0.5rem;
-}
-
-body.dark .control-group label {
-  color: var(--dark-text-light);
+  color: var(--text-light);
 }
 
 .control-group select,
@@ -127,13 +130,7 @@ body.dark .control-group label {
   border-radius: 4px;
   background-color: var(--card-background);
   color: var(--text-color);
-}
-
-body.dark .control-group select,
-body.dark .control-group input {
-  border-color: var(--dark-border-color);
-  background-color: var(--dark-card-background);
-  color: var(--dark-text-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .theme-toggle {
@@ -151,12 +148,7 @@ body.dark .control-group input {
   cursor: pointer;
   box-shadow: 0 2px 5px var(--shadow-color);
   z-index: 100;
-}
-
-body.dark .theme-toggle {
-  background-color: var(--dark-card-background);
-  border-color: var(--dark-border-color);
-  box-shadow: 0 2px 5px var(--dark-shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .code-example {
@@ -167,22 +159,14 @@ body.dark .theme-toggle {
   margin-top: 2rem;
   overflow: auto;
   box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-body.dark .code-example {
-  background-color: var(--dark-card-background);
-  border-color: var(--dark-border-color);
-  box-shadow: 0 2px 8px var(--dark-shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .code-example pre {
   margin: 0;
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
   font-size: 0.9rem;
-}
-
-body.dark .code-example pre {
-  color: var(--dark-text-color);
+  color: var(--text-color);
 }
 
 .footer {
@@ -191,11 +175,7 @@ body.dark .code-example pre {
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-light);
-}
-
-body.dark .footer {
-  border-top-color: var(--dark-border-color);
-  color: var(--dark-text-light);
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {

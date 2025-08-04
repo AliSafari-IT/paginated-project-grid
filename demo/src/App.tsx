@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PaginatedProjectGrid } from "@asafarim/paginated-project-grid";
 import { mockProjects } from "./mockData";
-import "./App.css";
 import { PackageLinks } from "@asafarim/shared";
 import { DisplayCode } from "@asafarim/display-code";
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [cardsPerPage, setCardsPerPage] = useState(6);
   const [showTechStackIcons, setShowTechStackIcons] = useState(true);
   const [enableSearch, setEnableSearch] = useState(true);
@@ -15,7 +14,6 @@ const App: React.FC = () => {
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    document.body.className = newTheme;
   };
 
   const handleProjectClick = (project: any) => {
@@ -24,12 +22,14 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    // Apply theme to body
+    document.body.className = theme;
+
+    // Apply tech stack icons class if needed
     if (showTechStackIcons) {
-      document.body.className = "techStackIcons";
-    } else {
-      document.body.className = "";
+      document.body.className += " techStackIcons";
     }
-  }, [showTechStackIcons]);
+  }, [theme, showTechStackIcons]);
 
   const codeExample = `import React from 'react'
 import { PaginatedProjectGrid } from '@asafarim/paginated-project-grid'
@@ -48,7 +48,10 @@ const projects = [
       { type: 'demo', url: 'https://demo.example.com' },
       { type: 'repo', url: 'https://github.com/example/repo' }
     ],
-    tags: ['web', 'frontend']
+    tags: [
+      { name: 'Web', onClick: () => alert('Web') },
+      { name: 'Frontend', navigateTo: 'https://example.com/frontend' }
+    ]
   },
   // More projects...
 ]
@@ -58,13 +61,15 @@ const MyProjectsPage = () => {
     <PaginatedProjectGrid 
       projects={projects}
       cardsPerPage={6}
-      currentTheme="light"
+      currentTheme="dark"
       showTechStackIcons={true}
       enableSearch={true}
       responsive={{
         mobile: 1,
         tablet: 2,
-        desktop: 3
+        desktop: 3,
+        largeDesktop: 4,
+        extraLargeDesktop: 5
       }}
       onProjectClick={(project) => console.log('Project clicked:', project.title)}
     />
@@ -75,24 +80,31 @@ export default MyProjectsPage`;
 
   return (
     <div className="container">
-      <button className="theme-toggle" onClick={toggleTheme}>
-        {theme === "light" ? "🌙" : "☀️"}
-      </button>
+
 
       <header className="header">
         <h1>Paginated Project Grid Demo</h1>
-        <p>
-          A responsive React component for displaying paginated project cards
-          with built-in search functionality. Try out the different
-          configurations below.
-        </p>
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          <p>
+            A responsive React component for displaying paginated project cards
+            with built-in search functionality. Try out the different
+            configurations below.
+          </p>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+        </div>
         <PackageLinks
           packageName="@asafarim/paginated-project-grid"
           githubPath="paginated-project-grid"
           demoPath="paginated-project-grid"
         />
       </header>
-
       <main>
         <section className="demo-section">
           <h2>Interactive Demo</h2>
@@ -153,12 +165,7 @@ export default MyProjectsPage`;
             onProjectClick={handleProjectClick}
             showTechStackIcons={showTechStackIcons}
             enableSearch={enableSearch}
-            showLoadMore={showLoadMore}
-            responsive={{
-              mobile: 1,
-              tablet: 2,
-              desktop: 3,
-            }}
+            showLoadMore={showLoadMore}           
           />
         </section>
 
@@ -169,7 +176,7 @@ export default MyProjectsPage`;
             theme={theme}
             showLineNumbers={true}
             showCopyButton={true}
-            fontSize="medium" 
+            fontSize="medium"
             wrapLines={true}
           />
         </section>
