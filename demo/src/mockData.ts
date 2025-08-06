@@ -206,5 +206,5 @@ const generateMockProjects = (count: number): Project[] => {
 };
 
 export const mockProjects: Project[] = [
-  ...generateMockProjects(12),
+  ...generateMockProjects(23),
 ]

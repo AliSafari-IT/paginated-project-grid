@@ -165,7 +165,10 @@ export default MyProjectsPage`;
             onProjectClick={handleProjectClick}
             showTechStackIcons={showTechStackIcons}
             enableSearch={enableSearch}
-            showLoadMore={showLoadMore}           
+            showLoadMore={showLoadMore}   
+            searchFields={['title', 'description', 'techStacks', 'tags', 'category']}
+            maxDescriptionLength={75}
+            searchPlaceholder="Search projects by name, description, or technology..."
           />
         </section>
 

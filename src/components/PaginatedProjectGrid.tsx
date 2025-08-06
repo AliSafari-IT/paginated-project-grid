@@ -267,7 +267,6 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                     updatedBy: project.updatedBy,
                     id: project.id,
                     isFeatured: project.isFeatured,
-                    key: project.id,
                     repo: project.repo,
                     userId: project.userId,
                   }}
