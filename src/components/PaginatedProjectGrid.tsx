@@ -231,7 +231,6 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
             {paginatedProjects && paginatedProjects.map((project: Project, index: number) => (
               <div 
                 key={project.id} 
-                className={styles.projectCard}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <ProjectCard
@@ -245,23 +244,32 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
                     showTechStackIcons,
                     maxDescriptionLength,
                     onCardClick: () => onProjectClick?.(project),
-                    featured: project.featured,
+                    featured: project.isFeatured,
                     isLoading: isLoading,
                     isPublic: project.isPublic,
                     lastUpdated: project.lastUpdated,
                     category: project.category,
+                    dateCreated: project.createdAt,
                     status: project.status,
                     tags: project.tags,
                     priority: project.priority,
                     budget: project.budget,
-                    budgetCurrency: project.budgetCurrency,
-                    budgetCurrencySymbol: project.budgetCurrencySymbol,
-                    dateCreated: project.dateCreated,
-                    dateUpdated: project.lastUpdated,
+                    dateUpdated: project.updatedAt,
                     progress: project.progress,
                     startDate: project.startDate,
                     endDate: project.endDate,
                     dueDate: project.dueDate,
+                    relatedProjects: project.relatedProjects,
+                    className: styles.projectCard,
+                    createdAt: project.createdAt,
+                    updatedAt: project.updatedAt,
+                    createdBy: project.createdBy,
+                    updatedBy: project.updatedBy,
+                    id: project.id,
+                    isFeatured: project.isFeatured,
+                    key: project.id,
+                    repo: project.repo,
+                    userId: project.userId,
                   }}
                 />
               </div>
