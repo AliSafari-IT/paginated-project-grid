@@ -74,8 +74,8 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm install --frozen-lockfile -C demo
-      - run: pnpm build -C demo --mode production
+      - run: cd demo && pnpm install --frozen-lockfile
+      - run: cd demo && NODE_ENV=production pnpm run build
       - run: cp demo/dist/index.html demo/dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
