@@ -3,6 +3,7 @@ import { PaginatedProjectGrid } from "@asafarim/paginated-project-grid";
 import { mockProjects } from "./mockData";
 import { PackageLinks } from "@asafarim/shared";
 import { DisplayCode } from "@asafarim/display-code";
+import GetStarted from "./GetStarted";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -106,6 +107,7 @@ export default MyProjectsPage`;
         />
       </header>
       <main>
+        <GetStarted />
         <section className="demo-section">
           <h2>Interactive Demo</h2>
 
