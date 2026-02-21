@@ -66,8 +66,8 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm build -C demo --mode production
-      - run: cp ./demo/dist/index.html ./demo/dist/404.html
+      - run: cd demo && pnpm install && pnpm run build --mode production
+      - run: ls -la demo/dist/ && cp demo/dist/index.html demo/dist/404.html
       - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
