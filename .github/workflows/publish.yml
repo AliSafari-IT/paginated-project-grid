@@ -40,7 +40,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm exmd:build
+        run: pnpm build
 
       - name: Publish to NPM (latest)
         run: pnpm publish --no-git-checks --access public
@@ -65,7 +65,7 @@ jobs:
           node-version: "20"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exmd:build
+      - run: pnpm build
       - run: echo "Build complete. Checking demo/dist contents..."
       - run: ls -la demo/dist/ || echo "demo/dist does not exist"
       - run: touch demo/dist/.nojekyll
