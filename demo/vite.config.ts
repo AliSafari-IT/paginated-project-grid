@@ -6,7 +6,7 @@ import { resolve } from 'path'
 export default defineConfig(() => {
   return {
     plugins: [react()],
-    base: '/paginated-project-grid/',  // Match the repository name for GitHub Pages
+    base: process.env.BASE_PATH || '/paginated-project-grid/',
     server: {
       port: 3007,
       open: true
