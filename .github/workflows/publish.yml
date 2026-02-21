@@ -68,6 +68,10 @@ jobs:
       - run: pnpm build
       - run: cd demo && pnpm install && pnpm run build --mode production
       - run: ls -la demo/dist/ && cp demo/dist/index.html demo/dist/404.html
+      - name: Clean gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git push origin --delete gh-pages || true
       - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -75,3 +79,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: demo/dist
           force_orphan: true
+          enable_jekyll: false
