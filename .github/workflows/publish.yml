@@ -52,7 +52,15 @@ jobs:
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,14 +74,15 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: rm -rf demo/dist && cd demo && pnpm install && pnpm run build --mode production
-      - run: ls -la demo/dist/ && cp demo/dist/index.html demo/dist/404.html && touch demo/dist/.nojekyll
-      - name: Publish to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
+      - run: pnpm install --frozen-lockfile -C demo
+      - run: pnpm build -C demo --mode production
+      - run: cp demo/dist/index.html demo/dist/404.html
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: demo/dist
-          force_orphan: true
-          enable_jekyll: false
-          cname: alisafari-it.github.io
+          path: demo/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
