@@ -66,6 +66,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm build -C demo
       - run: echo "Build complete. Checking demo/dist contents..."
       - run: ls -la demo/dist/ || echo "demo/dist does not exist"
       - run: mkdir -p demo/dist && touch demo/dist/.nojekyll
