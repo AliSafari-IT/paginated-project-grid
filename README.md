@@ -1,6 +1,10 @@
 # Package @asafarim/paginated-project-grid
 
-A responsive React component for displaying paginated project cards with built-in search functionality.
+A responsive React component for displaying paginated project cards with built-in search functionality. Live demo: [https://ali-safari-projects.github.io/paginated-project-grid/](https://ali-safari-projects.github.io/paginated-project-grid/)
+
+## Preview
+
+![Paginated Project Grid Demo](demo/public/paginated-project-grid.png)
 
 ## Features
 
