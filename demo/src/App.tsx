@@ -1,38 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { PaginatedProjectGrid } from "@asafarim/paginated-project-grid";
 import { mockProjects } from "./mockData";
-import { PackageLinks } from "@asafarim/shared";
 import { DisplayCode } from "@asafarim/display-code";
-import GetStarted from "./GetStarted";
+import { useTheme } from "@asafarim/react-themes";
+import { SiteNav } from "./SiteNav";
+import { RoadmapPage } from "./RoadmapPage";
+import { HowToPage } from "./HowToPage";
 
-const App: React.FC = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [cardsPerPage, setCardsPerPage] = useState(6);
-  const [showTechStackIcons, setShowTechStackIcons] = useState(true);
-  const [enableSearch, setEnableSearch] = useState(true);
-  const [showLoadMore, setShowLoadMore] = useState(false);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
-
-  const handleProjectClick = (project: any) => {
-    console.log("Project clicked:", project.title);
-    alert(`You clicked on: ${project.title}`);
-  };
-
-  useEffect(() => {
-    // Apply theme to body
-    document.body.className = theme;
-
-    // Apply tech stack icons class if needed
-    if (showTechStackIcons) {
-      document.body.className += " techStackIcons";
-    }
-  }, [theme, showTechStackIcons]);
-
-  const codeExample = `import React from 'react'
+const codeExample = `import React from 'react'
 import { PaginatedProjectGrid } from '@asafarim/paginated-project-grid'
 
 const projects = [
@@ -59,7 +35,7 @@ const projects = [
 
 const MyProjectsPage = () => {
   return (
-    <PaginatedProjectGrid 
+    <PaginatedProjectGrid
       projects={projects}
       cardsPerPage={6}
       currentTheme="dark"
@@ -79,35 +55,30 @@ const MyProjectsPage = () => {
 
 export default MyProjectsPage`;
 
+function HomePage() {
+  const { resolvedMode } = useTheme();
+  const theme = resolvedMode === "dark" ? "dark" : "light";
+  const [cardsPerPage, setCardsPerPage] = useState(6);
+  const [showTechStackIcons, setShowTechStackIcons] = useState(true);
+  const [enableSearch, setEnableSearch] = useState(true);
+  const [showLoadMore, setShowLoadMore] = useState(false);
+
+  const handleProjectClick = (project: any) => {
+    console.log("Project clicked:", project.title);
+    alert(`You clicked on: ${project.title}`);
+  };
+
   return (
-    <div className="container">
-
-
+    <div className={`container ${theme === "dark" ? "dark-theme" : ""}`}>
       <header className="header">
         <h1>Paginated Project Grid Demo</h1>
-        <div style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}>
-          <p>
-            A responsive React component for displaying paginated project cards
-            with built-in search functionality. Try out the different
-            configurations below.
-          </p>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {theme === "light" ? "🌙" : "☀️"}
-          </button>
-        </div>
-        <PackageLinks
-          packageName="@asafarim/paginated-project-grid"
-          githubPath="paginated-project-grid"
-          demoPath="paginated-project-grid"
-        />
+        <p>
+          A responsive React component for displaying paginated project cards
+          with built-in search functionality. Try out the different
+          configurations below.
+        </p>
       </header>
       <main>
-        <GetStarted />
         <section className="demo-section">
           <h2>Interactive Demo</h2>
 
@@ -167,7 +138,7 @@ export default MyProjectsPage`;
             onProjectClick={handleProjectClick}
             showTechStackIcons={showTechStackIcons}
             enableSearch={enableSearch}
-            showLoadMore={showLoadMore}   
+            showLoadMore={showLoadMore}
             searchFields={['title', 'description', 'techStacks', 'tags', 'category']}
             maxDescriptionLength={75}
             searchPlaceholder="Search projects by name, description, or technology..."
@@ -194,6 +165,20 @@ export default MyProjectsPage`;
       </footer>
     </div>
   );
-};
+}
+
+function App() {
+  return (
+    <>
+      <SiteNav />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/how-to" element={<HowToPage />} />
+        <Route path="/roadmap" element={<RoadmapPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </>
+  );
+}
 
 export default App;

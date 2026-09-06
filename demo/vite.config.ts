@@ -6,7 +6,7 @@ import { resolve } from 'path'
 export default defineConfig(() => {
   return {
     plugins: [react()],
-    base: process.env.NODE_ENV === 'production' ? '/paginated-project-grid/' : '/',
+    base: process.env.VITE_BASE_PATH || '/paginated-project-grid/',
     server: {
       port: 3007,
       open: true
