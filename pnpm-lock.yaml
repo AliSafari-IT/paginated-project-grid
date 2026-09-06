@@ -46,10 +46,10 @@ importers:
   demo:
     dependencies:
       '@asafarim/display-code':
-        specifier: ^1.0.1
-        version: 1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.2
+        version: 1.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@asafarim/paginated-project-grid':
-        specifier: link:..
+        specifier: workspace:*
         version: link:..
       '@asafarim/shared':
         specifier: ^1.7.3
@@ -89,8 +89,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@asafarim/display-code@1.0.1':
-    resolution: {integrity: sha512-HX+Q9x1x6iC6U+YPNCfQZ7mSsDeQOlvUX2RXH6YxcpM+qWIiQvntehBETOmI9730GmEa/PpLPfQl2ISxiAdjpQ==}
+  '@asafarim/display-code@1.2.2':
+    resolution: {integrity: sha512-1h/T+T219iyOCuVDOZz/CJ2no9sx0QbabAgm09MePy7wSdXjcq4iNocMnpEtsC/vddHpWJ3VhygvLM8eg8uMVA==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -484,6 +484,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@vitejs/plugin-react@4.7.0':
     resolution: {integrity: sha512-gUu9hwfWvvEDBBmgtAowQCojwZmJ5mcLn3aufeCsitijs3+f2NsrPtlAWIR6OPiqljl96GVCUbLe0HyqIpVaoA==}
@@ -1649,7 +1650,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.12
       '@jridgewell/trace-mapping': 0.3.29
 
-  '@asafarim/display-code@1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@asafarim/display-code@1.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
