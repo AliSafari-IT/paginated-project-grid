@@ -1023,11 +1023,20 @@ body {
 /* ── Use case grid ────────────────────────────────────────── */
 .howto-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
 }
 .howto-grid > * {
+  min-width: 0;
+}
+
+/* Each live example needs enough width for PaginatedProjectGrid's own
+   responsive three-column desktop layout. */
+.howto-card__demo {
+  width: 100%;
+}
+.howto-card__demo > * {
   min-width: 0;
 }
 
