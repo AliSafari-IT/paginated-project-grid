@@ -205,6 +205,15 @@ const sampleProjects: Project[] = [
   },
 ];
 
+// Simulated resolvers for the async dataSource demos
+const fetchSampleProjectsAsync = (): Promise<Project[]> =>
+  new Promise((resolve) => setTimeout(() => resolve(sampleProjects), 1500));
+
+const fetchFailingProjects = (): Promise<Project[]> =>
+  new Promise((_, reject) =>
+    setTimeout(() => reject(new Error("HTTP 503: Service Unavailable")), 1000)
+  );
+
 // ─── Use case card ────────────────────────────────────────────────────────
 
 interface UseCase {
@@ -502,6 +511,68 @@ const USE_CASES: UseCase[] = [
   onProjectClick={(project) => console.log('Clicked:', project.title)}
 />`,
   },
+  {
+    id: "async-data-source",
+    title: "Async Data Source",
+    description:
+      "Pass a URL or a resolver function via dataSource instead of a static projects array. With cacheStrategy=\"swr\", cached data renders instantly on repeat visits while fresh data loads in the background.",
+    badge: "dataSource",
+    render: (isDark) => (
+      <PaginatedProjectGrid
+        dataSource={fetchSampleProjectsAsync}
+        cacheKey="howto-async"
+        cacheStrategy="swr"
+        cardsPerPage={3}
+        currentTheme={isDark ? "dark" : "light"}
+        enableSearch={false}
+        loadingMessage="Fetching projects from API..."
+        onProjectClick={(p) => console.log("Clicked:", p.title)}
+      />
+    ),
+    code: `// Resolver function — or pass a URL string: dataSource="/api/projects"
+const fetchProjects = async () => {
+  const res = await fetch('/api/projects');
+  return res.json(); // Project[] or { projects: [...] } or { data: [...] }
+};
+
+<PaginatedProjectGrid
+  dataSource={fetchProjects}
+  cacheKey="my-projects"
+  cacheStrategy="swr"
+  cardsPerPage={3}
+  currentTheme="dark"
+  loadingMessage="Fetching projects..."
+  onError={(err) => console.error(err)}
+/>`,
+  },
+  {
+    id: "error-state",
+    title: "Error State & Retry",
+    description:
+      "When a dataSource fetch fails, the grid shows an error message with a Retry button. The onError callback lets you log or report the failure.",
+    badge: "onError",
+    render: (isDark) => (
+      <PaginatedProjectGrid
+        dataSource={fetchFailingProjects}
+        cacheStrategy="none"
+        cardsPerPage={3}
+        currentTheme={isDark ? "dark" : "light"}
+        errorMessage="Couldn't reach the projects API. Check your connection and try again."
+        retryText="Try again"
+      />
+    ),
+    code: `const fetchProjects = () => fetch('/api/projects').then(r => r.json());
+
+<PaginatedProjectGrid
+  dataSource={fetchProjects}
+  cacheStrategy="none"
+  cardsPerPage={3}
+  currentTheme="dark"
+  errorMessage="Couldn't reach the projects API."
+  retryText="Try again"
+  onError={(err) => reportError(err)}
+/>`,
+  },
 ];
 
 // ─── Page component ───────────────────────────────────────────────────────
@@ -551,7 +622,13 @@ export function HowToPage() {
         <div className="howto-card">
           <DisplayCode
             code={`interface PaginatedProjectGridProps {
-  projects: Project[];                          // Array of project objects (required)
+  projects?: Project[];                         // Static array of projects
+  dataSource?: string | (() => Promise<Project[]>); // URL or resolver for async data
+  cacheStrategy?: 'none' | 'swr';               // Stale-while-revalidate caching (default: 'swr')
+  cacheKey?: string;                            // Cache key (required for function dataSources)
+  onError?: (error: Error) => void;             // Callback when async fetch fails
+  errorMessage?: string;                        // Custom message in the error state
+  retryText?: string;                           // Text for the Retry button (default: "Retry")
   cardsPerPage?: number;                        // Cards per page (default: 6)
   currentTheme?: Theme;                         // 'light' | 'dark' | 'auto' (default: 'dark')
   className?: string;                           // Custom CSS class for the container

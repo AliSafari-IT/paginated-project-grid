@@ -274,6 +274,44 @@
   line-height: 1.5;
 }
 
+/* Retry Button (error state) */
+.retryButton {
+  margin-top: 1rem;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retryButton:hover {
+  background: #0052a3;
+}
+
+.retryButtonDark {
+  background: #4da6ff;
+  color: #1a1a1a;
+}
+
+.retryButtonDark:hover {
+  background: #66b3ff;
+}
+
+/* Revalidation indicator (SWR background refresh) */
+.revalidating {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+  text-align: right;
+}
+
+.revalidatingDark {
+  color: #adb5bd;
+}
+
 /* Loading State */
 .loadingState {
   display: flex;

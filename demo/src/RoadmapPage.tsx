@@ -133,7 +133,7 @@ const ppgTimelineData: PpgRoadmapItem[] = [
     version: "1.5.2",
     date: "September 2026",
     isoDate: "2026-09-06",
-    status: "current",
+    status: "released",
     title: "Workspace Stabilization",
     details: [
       "Aligned demo dependencies with the @asafarim ecosystem",
@@ -148,15 +148,16 @@ const ppgTimelineData: PpgRoadmapItem[] = [
   // ── Future roadmap (GitHub issues) ──────────────────────────────────────
   {
     version: "1.6.0",
-    date: "Planned",
-    isoDate: "2026-10-01",
-    status: "planned",
+    date: "September 2026",
+    isoDate: "2026-09-19",
+    status: "released",
     title: "Server-Side Rendering & Async Data Support",
     details: [
       "SSR-safe rendering with no window/document access during initial render",
-      "Async data source prop: fetch projects from a URL or resolver function",
-      "Built-in loading and error states for async fetching",
+      "dataSource prop: fetch projects from a URL or resolver function",
+      "Built-in error state with retry for async fetching",
       "Stale-while-revalidate caching for repeated navigations",
+      "useProjectSource hook exported for standalone use",
     ],
     icon: "🌐",
     category: "feature",
@@ -165,7 +166,6 @@ const ppgTimelineData: PpgRoadmapItem[] = [
   dataSource="/api/projects"
   cardsPerPage={6}
   currentTheme="dark"
-  isLoading={isLoading}
   onError={(err) => console.error(err)}
   cacheStrategy="swr"
 />`,

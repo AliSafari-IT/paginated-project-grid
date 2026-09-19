@@ -5,8 +5,20 @@ export type Project = ProjectCardProps & {
   projectId?: string;
 }
 
+export type ProjectDataSource =
+  | string
+  | (() => Promise<Project[] | { projects: Project[] } | { data: Project[] }>);
+
+export type CacheStrategy = 'none' | 'swr';
+
 export type PaginatedProjectGridProps = {
-  projects: Project[];
+  projects?: Project[];
+  dataSource?: ProjectDataSource;
+  cacheStrategy?: CacheStrategy;
+  cacheKey?: string;
+  onError?: (error: Error) => void;
+  errorMessage?: string;
+  retryText?: string;
   cardsPerPage?: number;
   currentTheme?: Theme;
   className?: string;

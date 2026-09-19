@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PaginatedProjectGrid } from "@asafarim/paginated-project-grid";
+import type { Project } from "@asafarim/paginated-project-grid";
 import { mockProjects } from "./mockData";
 import { DisplayCode } from "@asafarim/display-code";
 import { useTheme } from "@asafarim/react-themes";
@@ -55,6 +56,10 @@ const MyProjectsPage = () => {
 
 export default MyProjectsPage`;
 
+// Simulated async data source (resolves after a delay)
+const fetchProjectsAsync = (): Promise<Project[]> =>
+  new Promise((resolve) => setTimeout(() => resolve(mockProjects), 1200));
+
 function HomePage() {
   const { resolvedMode } = useTheme();
   const theme = resolvedMode === "dark" ? "dark" : "light";
@@ -62,6 +67,7 @@ function HomePage() {
   const [showTechStackIcons, setShowTechStackIcons] = useState(true);
   const [enableSearch, setEnableSearch] = useState(true);
   const [showLoadMore, setShowLoadMore] = useState(false);
+  const [useAsyncData, setUseAsyncData] = useState(false);
 
   const handleProjectClick = (project: any) => {
     console.log("Project clicked:", project.title);
@@ -129,10 +135,24 @@ function HomePage() {
                 Use "Load More" Instead of Pagination
               </label>
             </div>
+
+            <div className="control-group">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={useAsyncData}
+                  onChange={() => setUseAsyncData(!useAsyncData)}
+                />
+                Fetch Async (simulated dataSource)
+              </label>
+            </div>
           </div>
 
           <PaginatedProjectGrid
-            projects={mockProjects}
+            projects={useAsyncData ? undefined : mockProjects}
+            dataSource={useAsyncData ? fetchProjectsAsync : undefined}
+            cacheKey="demo-async-projects"
+            cacheStrategy="swr"
             cardsPerPage={cardsPerPage}
             currentTheme={theme}
             onProjectClick={handleProjectClick}

@@ -1,10 +1,17 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { ProjectCard } from '@asafarim/project-card';
 import { PaginatedProjectGridProps, Project } from '../types';
+import { useProjectSource } from '../hooks/useProjectSource';
 import styles from './PaginatedProjectGrid.module.css';
 
 export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
-  projects,
+  projects: projectsProp,
+  dataSource,
+  cacheStrategy = 'swr',
+  cacheKey,
+  onError,
+  errorMessage,
+  retryText = "Retry",
   cardsPerPage = 6,
   currentTheme = 'dark',
   className = '',
@@ -15,7 +22,7 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   searchPlaceholder = "Search projects by name, description, or technology...",
   noResultsMessage = "No projects found matching your search.",
   loadingMessage = "Loading projects...",
-  isLoading = false,
+  isLoading: isLoadingProp = false,
   searchFields = ['title', 'description', 'techStacks', 'tags'],
   responsive = {
     mobile: 1,
@@ -32,6 +39,17 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [itemsToShow, setItemsToShow] = useState(cardsPerPage);
+
+  const {
+    projects: fetchedProjects,
+    isLoading: sourceLoading,
+    isValidating,
+    error: sourceError,
+    refresh,
+  } = useProjectSource({ dataSource, cacheStrategy, cacheKey, onError });
+
+  const projects = dataSource ? fetchedProjects : projectsProp;
+  const isLoading = isLoadingProp || (dataSource ? sourceLoading : false);
 
   const isDark = currentTheme === 'dark';
 
@@ -156,13 +174,35 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
     isDark ? styles.searchInputDark : ''
   ].filter(Boolean).join(' ');
 
-  // Loading state
-  if (isLoading) {
+  // Loading state (first fetch or explicit isLoading with no data yet)
+  if (isLoading && (!projects || projects.length === 0)) {
     return (
       <div className={containerClasses}>
         <div className={`${styles.loadingState} ${isDark ? styles.loadingStateDark : ''}`}>
           <div className={styles.loadingSpinner}>⟳</div>
           {loadingMessage}
+        </div>
+      </div>
+    );
+  }
+
+  // Error state (only when there is no data to show)
+  if (sourceError && (!projects || projects.length === 0)) {
+    return (
+      <div className={containerClasses}>
+        <div className={`${styles.emptyState} ${isDark ? styles.emptyStateDark : ''}`}>
+          <div className={styles.emptyStateIcon}>⚠️</div>
+          <div className={styles.emptyStateTitle}>Failed to Load Projects</div>
+          <div className={styles.emptyStateMessage}>
+            {errorMessage || sourceError.message}
+          </div>
+          <button
+            type="button"
+            onClick={refresh}
+            className={`${styles.retryButton} ${isDark ? styles.retryButtonDark : ''}`}
+          >
+            {retryText}
+          </button>
         </div>
       </div>
     );
@@ -221,6 +261,13 @@ export const PaginatedProjectGrid: React.FC<PaginatedProjectGridProps> = ({
           <div className={styles.emptyStateMessage}>
             {noResultsMessage}
           </div>
+        </div>
+      )}
+
+      {/* Revalidation indicator (SWR background refresh) */}
+      {isValidating && filteredProjects.length > 0 && (
+        <div className={`${styles.revalidating} ${isDark ? styles.revalidatingDark : ''}`}>
+          Updating…
         </div>
       )}
 
