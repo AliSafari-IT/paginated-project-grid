@@ -286,6 +286,109 @@ return (
     issueNumber: 6,
     votes: 0,
   },
+  {
+    version: "2.1.0",
+    date: "Ideation",
+    isoDate: "2027-03-01",
+    status: "ideation",
+    title: "AI Semantic Search & Smart Collections",
+    details: [
+      "Pluggable semanticResolver for embedding-based ranking",
+      "Natural-language queries like \"React dashboards with charts\"",
+      "Auto-grouped smart collections by detected similarity",
+      "Graceful fallback to substring matching without a resolver",
+    ],
+    icon: "🧠",
+    category: "feature",
+    tags: ["ai", "semantic-search", "embeddings", "collections"],
+    proposedApi: `<PaginatedProjectGrid
+  projects={projects}
+  semanticSearch={{
+    resolver: embedQuery,
+    threshold: 0.72,
+    groupResults: 'collections',
+  }}
+  searchPlaceholder="Try 'React dashboards with charts'…"
+/>`,
+    issueUrl: "https://github.com/AliSafari-IT/paginated-project-grid/issues/8",
+    issueNumber: 8,
+    votes: 0,
+  },
+  {
+    version: "2.2.0",
+    date: "Ideation",
+    isoDate: "2027-04-01",
+    status: "ideation",
+    title: "Motion & Delight",
+    details: [
+      "View Transitions API for pagination changes",
+      "FLIP animations when filtering or searching reorders cards",
+      "Staggered card entrance animations",
+      "prefers-reduced-motion respected; animate={false} opt-out",
+    ],
+    icon: "💫",
+    category: "feature",
+    tags: ["animations", "view-transitions", "flip", "a11y"],
+    proposedApi: `<PaginatedProjectGrid
+  projects={projects}
+  animate
+  transition="view"
+  stagger={40}
+  respectReducedMotion
+/>`,
+    issueUrl: "https://github.com/AliSafari-IT/paginated-project-grid/issues/9",
+    issueNumber: 9,
+    votes: 0,
+  },
+  {
+    version: "2.3.0",
+    date: "Ideation",
+    isoDate: "2027-05-01",
+    status: "ideation",
+    title: "Embeddable Web Component",
+    details: [
+      "<paginated-project-grid> custom-element build target",
+      "Works in Vue, Angular, Svelte, or plain HTML — no React needed",
+      "Attribute/property bridge to the existing prop surface",
+      "data-source attribute wired to the async pipeline; theme via CSS vars",
+    ],
+    icon: "🧩",
+    category: "feature",
+    tags: ["web-component", "embed", "framework-agnostic", "distribution"],
+    proposedApi: `<paginated-project-grid
+  data-source="/api/projects"
+  cards-per-page="6"
+  theme="dark"
+></paginated-project-grid>`,
+    issueUrl: "https://github.com/AliSafari-IT/paginated-project-grid/issues/10",
+    issueNumber: 10,
+    votes: 0,
+  },
+  {
+    version: "2.4.0",
+    date: "Ideation",
+    isoDate: "2027-06-01",
+    status: "ideation",
+    title: "Command Palette & Keyboard Navigation",
+    details: [
+      "Cmd+K / Ctrl+K command palette over projects and actions",
+      "Roving-tabindex arrow-key navigation across cards",
+      "Configurable shortcuts map prop",
+      "aria-live announcements for pagination and result counts",
+    ],
+    icon: "⌨️",
+    category: "feature",
+    tags: ["keyboard", "command-palette", "a11y", "shortcuts"],
+    proposedApi: `<PaginatedProjectGrid
+  projects={projects}
+  commandPalette
+  keyboardNavigation
+  shortcuts={{ palette: 'mod+k', nextPage: ']' }}
+/>`,
+    issueUrl: "https://github.com/AliSafari-IT/paginated-project-grid/issues/11",
+    issueNumber: 11,
+    votes: 0,
+  },
 ];
 
 // ─── Changelog timeline (past releases) ───────────────────────────────────

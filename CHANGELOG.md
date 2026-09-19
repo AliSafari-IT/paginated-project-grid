@@ -5,6 +5,15 @@ All notable changes to `@asafarim/paginated-project-grid` are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-09-19
+
+### Added
+
+- Four new ideation items on the demo Roadmap page: AI semantic search &
+  smart collections, motion & delight animations, an embeddable web
+  component build, and a command palette with keyboard navigation
+  (issues #8–#11)
+
 ## [1.6.0] - 2026-09-19
 
 ### Added
