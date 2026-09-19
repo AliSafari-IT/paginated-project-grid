@@ -5,6 +5,24 @@ All notable changes to `@asafarim/paginated-project-grid` are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-09-19
+
+### Added
+
+- `dataSource` prop — fetch projects from a URL or an async resolver function
+  instead of passing a static `projects` array
+- Stale-while-revalidate caching via `cacheStrategy="swr"` and `cacheKey`;
+  cached projects render instantly on repeat mounts while fresh data loads in
+  the background
+- Built-in error state with a Retry button (`errorMessage`, `retryText`,
+  `onError`) for failed async fetches
+- `useProjectSource` hook exported for standalone async data handling
+
+### Changed
+
+- `projects` prop is now optional (use either `projects` or `dataSource`)
+- Rendering is SSR-safe: no `window`/`document` access outside effects
+
 ## [1.5.3] - 2026-09-06
 
 ### Fixed
